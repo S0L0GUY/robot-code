@@ -12,8 +12,6 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 controller_data = ""
 
-# I dont remember how im going to send the data...
-
 db.clear()
 db.write("SYSTEM", "program starting")
 
@@ -36,7 +34,7 @@ def program_running(file_name):
 
 while True:
     clear_screen()
-    print("Driver Station\n\n")
+    print("Driver Controller\n\n")
 
     while program_running('controller_listener.py'):
         # TODO: Make the robot stop while this is true.
@@ -48,4 +46,16 @@ while True:
         controller_data = json.load(file)
 
     if old_controller_data != controller_data:
-        sock.sendto(controller_data.encode('utf-8'), (raspberry_pi_ip, port))
+        sock.sendto(json.dumps(controller_data).encode('utf-8'), (raspberry_pi_ip, port))
+
+    if input() == '':
+        break
+
+no_data = {"axis_0": 0.0, "axis_1": 0.0, "axis_2": 0.0, "axis_3": 0.0, "axis_4": -1.0, "axis_5": -1.0, "button_0": 0, "button_1": 0, "button_2": 0, "button_3": 0, "button_4": 0, "button_5": 0, "button_6": 0, "button_7": 0, "button_8": 0, "button_9": 0, "button_10": 0, "button_11": 0, "button_12": 0, "button_13": 0, "button_14": 0, "button_15": 0, "hat_0": [0, 0]}
+no_data = json.dumps(no_data).encode('utf-8')
+
+clear_screen()
+print("Program E-STOP Called")
+
+while True:
+    sock.sendto(no_data, (raspberry_pi_ip, port))

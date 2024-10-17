@@ -49,8 +49,6 @@ while True:
             print(f"Connected to controller: {joystick.get_name()}")
 
         current_controller_name = joystick.get_name()
-
-        pygame.event.pump()
             
         # Get all controller inputs
         inputs = get_controller_inputs(joystick)
