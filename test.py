@@ -1,15 +1,13 @@
-import json
-import os
+# sudo apt-get install python3-gpiozero
+# go to https://gpiozero.readthedocs.io/en/latest/api_output.html for documentation
+
+from gpiozero import LED
+from time import sleep
+
+led = LED(27) # Pin number
 
 while True:
-    while True:
-        try:
-            with open('json_files/controller_inputs.json', 'r') as file:
-                data = json.load(file)
-            
-            break
-        except:
-            pass
-
-    os.system('cls')
-    print(json.dumps(data, indent=4))
+    led.on()
+    sleep(1)
+    led.off()
+    sleep(1)
