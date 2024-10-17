@@ -3,12 +3,14 @@ import time
 import os
 import json
 
-if os.name == 'nt':
-    os_type = "win"
+current_controller_name = ""
 
 # Initialize Pygame and Joystick
 pygame.init()
 pygame.joystick.init()
+
+if os.name == 'nt':
+    os_type = "win"
 
 def clear_screen():
     """Check the operating system and clear the terminal."""    
@@ -37,33 +39,28 @@ def get_controller_inputs(joystick):
 
 # Main loop to capture all controller values
 while True:
-    clear_screen()
-    
     # Check if a joystick is connected
     if pygame.joystick.get_count() > 0:
         joystick = pygame.joystick.Joystick(0)
         joystick.init()
-        print(f"Controller connected: {joystick.get_name()}")
-        print(f"Number of axes: {joystick.get_numaxes()}")
-        print(f"Number of buttons: {joystick.get_numbuttons()}")
-        print(f"Number of hats: {joystick.get_numhats()}")
 
-        while True:
-            pygame.event.pump()
-            
-            # Get all controller inputs
-            inputs = get_controller_inputs(joystick)
-            
-            # Store inputs in JSON file
-            with open('controller_inputs.json', 'w') as f:
-                json.dump(inputs, f, indent=4)
-            
-            # Print current inputs
+        if current_controller_name != joystick.get_name():
             clear_screen()
-            print(json.dumps(inputs, indent=4))
+            print(f"Connected to controller: {joystick.get_name()}")
+
+        current_controller_name = joystick.get_name()
+
+        pygame.event.pump()
             
-            time.sleep(0.1)  # Adjust the delay as needed
+        # Get all controller inputs
+        inputs = get_controller_inputs(joystick)
+            
+        # Store inputs in JSON file
+        with open('json_files/controller_inputs.json', 'w') as f:
+            json.dump(inputs, f)
+
     else:
+        clear_screen()
         print("no controller detected")
 
 # Quit Pygame
