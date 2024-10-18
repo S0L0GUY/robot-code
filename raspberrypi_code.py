@@ -1,21 +1,13 @@
 # sudo apt-get install python3-gpiozero
 # go to https://gpiozero.readthedocs.io/en/latest/api_output.html for documentation
 
-from gpiozero import LED
+import time
 import socket
 import json
 
-button_name = "button_13" # Replace with button #
-led = LED(27) # Pin number
-
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-sock.bind(('0.0.0.0', 5005)) # Port ID
-
+counter = 0
 while True:
-    data, addr = sock.recvfrom(1024) # Buffer size
+    data, addr = sock.recvfrom(1100)
     controller_data = json.loads(data.decode('utf-8'))
-    
-    if controller_data[button_name] == 1:
-        led.on()
-    else:
-        led.off()
+    counter += 1
+    print(f"Received packet #{counter} at {time.time()}: {controller_data}")

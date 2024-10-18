@@ -44,26 +44,22 @@ else:
     exit()  # Exit if no joystick is found
 
 # Main loop to capture all controller values
-try:
-    while True:
-        # Handle events
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                exit()
+while True:
+    pygame.event.pump()
+    
+    # Handle events
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            exit()
 
-        # Get controller inputs
-        controller_data = get_controller_inputs(joystick)
-        
-        # Write controller inputs to a JSON file
-        with open('json_files/controller_inputs.json', 'w') as f:
-            json.dump(controller_data, f)
-        
-        # Print the captured data (optional, for debugging)
-        print(controller_data)
-        
-        time.sleep(0.5)  # Add a small delay to avoid overwhelming the system with too many writes
-except KeyboardInterrupt:
-    print("Exiting program.")
-finally:
-    pygame.quit()
+    # Get controller inputs
+    controller_data = get_controller_inputs(joystick)
+    
+    # Write controller inputs to a JSON file
+    with open('json_files/controller_inputs.json', 'w') as f:
+        json.dump(controller_data, f)
+    
+    print(controller_data)
+    
+    time.sleep(0.3)

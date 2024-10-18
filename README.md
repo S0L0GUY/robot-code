@@ -13,6 +13,11 @@
  - - ### Motor Controllers:
  - - - [BOJACK L298N Motor DC Dual H-Bridge Motor Driver](https://a.co/d/ioh6lwU)
  - - - [DROK DC Motor Driver, L298 Dual H Bridge Motor Speed Controller](https://a.co/d/6dGAlb0)
+ - - ### Jumper Wires:
+ - - - [80 Piece Female to Female Jumper Wires](https://a.co/d/cXCbcr1)
+ - - ### Ethernet Adapter:
+ - - - [Three Port USB and Ethernet Hub](https://a.co/d/1UECUyl)
+ - - - [USB 2.0 Ethernet Adapter](https://a.co/d/1l5z6NZ)
  - - ### Cameras:
  - - - [Webcam with Noise Canceling Microphone](https://a.co/d/9G2iSJU)
  - - - [Movo WebMic All-in-One Webcam](https://a.co/d/1quVisd)
@@ -26,7 +31,12 @@
  - ## `Drivetrain:`
  - - [Robot Tank Chassis](https://a.co/d/7gMDbBZ)
  - ## `Electronics:`
+ - - ### `Motor Controller`
  - - - [DROK DC Motor Driver, L298 Dual H Bridge Motor Speed Controller](https://a.co/d/6dGAlb0)
+ - - ### `Jumper Wires`
+ - - - [80 Piece Female to Female Jumper Wires](https://a.co/d/cXCbcr1)
+ - - ### `Ethernet Adapter / USB Hub`
+ - - - [Three Port USB and Ethernet Hub](https://a.co/d/1UECUyl)
 
 
 

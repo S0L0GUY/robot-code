@@ -1,5 +1,6 @@
 import os
 import json
+import time
 from debug_function_library import Debug as db
 import psutil
 import socket
@@ -10,7 +11,12 @@ port = 5005  # Port defined in the receiver code
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-controller_data = ""
+old_controller_data = ""
+
+'''
+with open('json_files/controller_inputs.json', 'r') as file:
+    old_controller_data = json.load(file)
+    '''
 
 db.clear()
 db.write("SYSTEM", "program starting")
@@ -26,13 +32,15 @@ while True:
     clear_screen()
     print("Driver Controller\n\n")
 
-    old_controller_data = controller_data
-
+    # Read the file
     with open('json_files/controller_inputs.json', 'r') as file:
         controller_data = json.load(file)
 
-    if old_controller_data != controller_data:
-        sock.sendto(json.dumps(controller_data).encode('utf-8'), (raspberry_pi_ip, port))
+    sock.sendto(json.dumps(controller_data).encode('utf-8'), (raspberry_pi_ip, port))
+    print("Sent DATA")
+
+    # Add a small delay to reduce CPU usage
+    time.sleep(0.1)
 
     if input() == '':
         break
