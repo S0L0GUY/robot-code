@@ -5,6 +5,9 @@ import time
 import socket
 import json
 
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+sock.bind(('0.0.0.0', 5005)) # Port ID
+
 counter = 0
 while True:
     data, addr = sock.recvfrom(1100)
