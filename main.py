@@ -22,23 +22,9 @@ def clear_screen():
     """Check the operating system and clear the terminal."""    
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def program_running(file_name):
-    """Check if a program with the given file name is running."""
-    for process in psutil.process_iter(['name']):
-        try:
-            if process.name().lower() == file_name.lower():
-                return True
-        except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
-            pass
-    return False
-
 while True:
     clear_screen()
     print("Driver Controller\n\n")
-
-    while program_running('controller_listener.py'):
-        # TODO: Make the robot stop while this is true.
-        print("controller listener not running")
 
     old_controller_data = controller_data
 

@@ -3,8 +3,6 @@ import time
 import os
 import json
 
-current_controller_name = ""
-
 # Initialize Pygame and Joystick
 pygame.init()
 pygame.joystick.init()
@@ -13,7 +11,7 @@ if os.name == 'nt':
     os_type = "win"
 
 def clear_screen():
-    """Check the operating system and clear the terminal."""    
+    """Check the operating system and clear the terminal."""
     if os_type == "win":
         os.system('cls')
     else:
@@ -37,13 +35,23 @@ def get_controller_inputs(joystick):
     
     return inputs
 
+# Initialize the joystick if any are connected
+if pygame.joystick.get_count() > 0:
+    joystick = pygame.joystick.Joystick(0)
+    joystick.init()
+else:
+    print("No controller connected")
+    exit()  # Exit if no joystick is found
+
 # Main loop to capture all controller values
-while True:
-    # Check if a joystick is connected
-    if pygame.joystick.get_count() > 0:
-        joystick = pygame.joystick.Joystick(0)
-        joystick.init()
-        
+try:
+    while True:
+        # Handle events
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+
         # Get controller inputs
         controller_data = get_controller_inputs(joystick)
         
@@ -54,7 +62,8 @@ while True:
         # Print the captured data (optional, for debugging)
         print(controller_data)
         
-    else:
-        print("No controller connected")
-    
-    time.sleep(0.5)  # Add a small delay to avoid overwhelming the system with too many writes
+        time.sleep(0.5)  # Add a small delay to avoid overwhelming the system with too many writes
+except KeyboardInterrupt:
+    print("Exiting program.")
+finally:
+    pygame.quit()
