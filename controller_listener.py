@@ -43,23 +43,18 @@ while True:
     if pygame.joystick.get_count() > 0:
         joystick = pygame.joystick.Joystick(0)
         joystick.init()
-
-        if current_controller_name != joystick.get_name():
-            clear_screen()
-            print(f"Connected to controller: {joystick.get_name()}")
-
-        current_controller_name = joystick.get_name()
-            
-        # Get all controller inputs
-        inputs = get_controller_inputs(joystick)
-            
-        # Store inputs in JSON file
+        
+        # Get controller inputs
+        controller_data = get_controller_inputs(joystick)
+        
+        # Write controller inputs to a JSON file
         with open('json_files/controller_inputs.json', 'w') as f:
-            json.dump(inputs, f)
-
+            json.dump(controller_data, f)
+        
+        # Print the captured data (optional, for debugging)
+        print(controller_data)
+        
     else:
-        clear_screen()
-        print("no controller detected")
-
-# Quit Pygame
-pygame.quit()
+        print("No controller connected")
+    
+    time.sleep(0.5)  # Add a small delay to avoid overwhelming the system with too many writes

@@ -5,7 +5,7 @@ import psutil
 import socket
 
 # Define the Raspberry Pi's IP address and the port you're sending to
-raspberry_pi_ip = '192.168.0.100'  # Replace with your Raspberry Pi's IP
+raspberry_pi_ip = '172.20.10.5'  # Replace with your Raspberry Pi's IP
 port = 5005  # Port defined in the receiver code
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)

@@ -5,7 +5,7 @@ from gpiozero import LED
 import socket
 import json
 
-button_name = "" # Replace with button #
+button_name = "button_13" # Replace with button #
 led = LED(27) # Pin number
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
