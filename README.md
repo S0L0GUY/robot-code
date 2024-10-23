@@ -13,6 +13,8 @@
  - - ### Motor Controllers:
  - - - [BOJACK L298N Motor DC Dual H-Bridge Motor Driver](https://a.co/d/ioh6lwU)
  - - - [DROK DC Motor Driver, L298 Dual H Bridge Motor Speed Controller](https://a.co/d/6dGAlb0)
+ - - - [Dual Channel H Bridge Motor Driver](https://a.co/d/6OhxRfN)
+ - - - [CNC Digital Microstep driver](https://a.co/d/0DrMOxl)
  - - ### Jumper Wires:
  - - - [80 Piece Female to Female Jumper Wires](https://a.co/d/cXCbcr1)
  - - ### Ethernet Adapter:
@@ -32,7 +34,7 @@
  - - [Robot Tank Chassis](https://a.co/d/7gMDbBZ)
  - ## `Electronics:`
  - - ### `Motor Controller`
- - - - [DROK DC Motor Driver, L298 Dual H Bridge Motor Speed Controller](https://a.co/d/6dGAlb0)
+ - - - 
  - - ### `Jumper Wires`
  - - - [80 Piece Female to Female Jumper Wires](https://a.co/d/cXCbcr1)
  - - ### `Ethernet Adapter / USB Hub`
@@ -40,4 +42,4 @@
 
 
 
-`total: $35.44`
+`total: $21.48`
