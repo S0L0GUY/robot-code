@@ -1,11 +1,11 @@
 import socket
 import json
-from gpiozero import LED
+from gpiozero import LED # type: ignore
 
 led = LED(27)
 
 # Define the port the server will listen on
-PORT = 12345
+PORT = 5005
 BUFFER_SIZE = 1024
 
 def receive_json():

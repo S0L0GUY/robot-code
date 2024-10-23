@@ -1,4 +1,4 @@
-# robot-code
+# Robot Code
  The code to a robot that I am making.
 
 # Parts List:
@@ -40,4 +40,4 @@
 
 
 
-`total: $34.95`
+`total: $35.44`
