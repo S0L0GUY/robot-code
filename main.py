@@ -13,11 +13,6 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 old_controller_data = ""
 
-'''
-with open('json_files/controller_inputs.json', 'r') as file:
-    old_controller_data = json.load(file)
-    '''
-
 db.clear()
 db.write("SYSTEM", "program starting")
 
