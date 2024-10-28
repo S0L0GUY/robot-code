@@ -1,7 +1,6 @@
 import os
 import json
 import time
-import psutil
 import socket
 
 # Define the Raspberry Pi's IP address and the port you're sending to
