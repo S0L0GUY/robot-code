@@ -1,11 +1,9 @@
 {
     "axes": {
-        "axis_0": 0.0,
-        "axis_1": 0.0,
-        "axis_2": 0.0,
-        "axis_3": 0.0,
-        "axis_4": -1.0,
-        "axis_5": -1.0
+        "axis_0": -0.3671875,
+        "axis_1": -0.2109375,
+        "axis_2": -0.2421875,
+        "axis_3": -0.84375
     },
     "buttons": {
         "button_0": 0,
@@ -21,9 +19,7 @@
         "button_10": 0,
         "button_11": 0,
         "button_12": 0,
-        "button_13": 0,
-        "button_14": 0,
-        "button_15": 0
+        "button_13": 0
     },
     "hats": {
         "hat_0": [
