@@ -6,6 +6,7 @@
  - - ### Completed Drivetrain:
  - - - [Robot Tank Chassis](https://a.co/d/7gMDbBZ)
  - - - [Professional Metal Platfrom with DC Motor](https://a.co/d/caihPuo)
+ - - - [Robot Tank Chassis Metal](https://a.co/d/c2apBfQ)
  - - ### Motors:
  - - - [Bringsmart DC 12V 100rpm with Bracket 37mm](https://a.co/d/i4MMU4t)
  - - - [Greartisan DC 12V 200RPM](https://a.co/d/9golsNJ)
@@ -27,14 +28,14 @@
  - - [ExpertPower 12v 7ah Rechargeable Sealed Lead Acid Battery](https://a.co/d/d4gsVd8)
  - - [Tenergy NiMH Battery Pack 12V 2000mAh](https://a.co/d/dOvbrWA)
 
-
+[Wiering Diagram](https://www.tldraw.com/s/v2_c_wILNgnf29_3v32llgyXTq?d=v-887.-64.1920.953.eGgpUsz7OhJ7m6jL8Jj8d)
 
 ## `Best Pick`
  - ## `Drivetrain:`
- - - [Robot Tank Chassis](https://a.co/d/7gMDbBZ)
+ - - [Robot Tank Chassis Metal](https://a.co/d/c2apBfQ)
  - ## `Electronics:`
  - - ### `Motor Controller`
- - - - 
+ - - - [DROK DC Motor Driver, L298 Dual H Bridge Motor Speed Controller](https://a.co/d/6dGAlb0)
  - - ### `Jumper Wires`
  - - - [80 Piece Female to Female Jumper Wires](https://a.co/d/cXCbcr1)
  - - ### `Ethernet Adapter / USB Hub`
@@ -42,4 +43,4 @@
 
 
 
-`total: $21.48`
+`total: $56.17`
