@@ -1,27 +1,33 @@
-from flask import Flask, request, jsonify
+import socket
+import json
 from gpiozero import LED # type: ignore
 
-app = Flask(__name__)
-
-def process_data(data):
-    # Add your data processing logic here
-    print("Processing data:", data)
-    # For example, you could control an LED based on the data
+def compute_controller_inputs(controller_data):
     led = LED(27)
-    if data.get["buttons"]["button_2"] == 1:
+    print("data received")
+    if controller_data['buttons']['button_1'] == 1:
         led.on()
     else:
         led.off()
 
-@app.route('/upload', methods=['POST'])
-def upload_file():
-    if request.is_json:
-        data = request.get_json()
-        # Process the JSON data here
-        process_data(data)
-        return jsonify({"message": "JSON received and processed"}), 200
-    else:
-        return jsonify({"message": "Request is not JSON"}), 400
+def start_server(host='0.0.0.0', port=65432):
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.bind((host, port))
+        s.listen()
+        print(f"Listening on {host}:{port}")
+        while True:
+            conn, addr = s.accept()
+            with conn:
+                print(f"Connected by {addr}")
+                data = conn.recv(1024)
+                if not data:
+                    break
+                try:
+                    controller_input = json.loads(data.decode('utf-8'))
+                    print(f"Received controller input: {controller_input}")
+                    compute_controller_inputs(controller_input)
+                except json.JSONDecodeError:
+                    print("Received invalid JSON")
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+if __name__ == "__main__":
+    start_server()
