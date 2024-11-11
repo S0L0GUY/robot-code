@@ -1,43 +1,104 @@
+from gpiozero import LED
+import pygame
 import json
-import socket
-import time
-from controller_listener import ControllerListener
+import os
 
-class ControllerSender:
-    def __init__(self, host, port, file_path='json_files/controller_inputs.json'):
-        self.host = host
-        self.port = port
-        self.file_path = file_path
+# Dictionary to store controller inputs
+controller_inputs = {
+    "axes": {},
+    "buttons": {},
+    "hats": {}
+}
 
-    def send_controller_inputs(self):
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            while True:
-                try:
-                    s.connect((self.host, self.port))
-                    print(f"Connected to Raspberry Pi at {self.host}:{self.port}")
-                    break
-                except socket.error as e:
-                    print(f"Connection error: {e}. Retrying...")
+LED_PIN_ID = LED(27)
 
-            while True:
-                try:
-                    with open(self.file_path, 'r') as f:
-                        controller_inputs = json.load(f)
-                    
-                    s.sendall(json.dumps(controller_inputs).encode('utf-8'))
-                    print(f"Sent: {controller_inputs}")
+# Initialize pygame
+pygame.init()
 
-                    time.sleep(0.1)
-                except KeyboardInterrupt:
-                    print("Stopping the sender.")
-                    break
-                except Exception as e:
-                    print(f"An error occurred: {e}")
-                    break
+# Check if a controller is connected
+if pygame.joystick.get_count() == 0:
+    print("No controller connected!")
+    exit()
 
-if __name__ == "__main__":
-    listener = ControllerListener()
-    sender = ControllerSender(host='raspberrypi.local', port=65432)
+# Initialize the first joystick (controller)
+joystick = pygame.joystick.Joystick(0)
+joystick.init()
 
-    # listener.capture_controller_inputs()
-    sender.send_controller_inputs()
+# Create directory if it doesn't exist
+os.makedirs('json_files', exist_ok=True)
+
+def save_inputs_to_json(file_path='json_files/controller_inputs.json'):
+    with open(file_path, 'w') as f:
+        json.dump(controller_inputs, f, indent=4)
+
+def capture_controller_inputs():
+    """
+    Captures the current state of the controller inputs and returns them as a dictionary.
+    
+    The function captures the following inputs from the controller:
+        - Axis movements
+        - Button presses
+        - Hat (D-pad) movements
+    The captured inputs are stored in a dictionary with the following structure:
+        {
+            'axes': {
+                'axis_0': value,
+                'axis_1': value,
+                ...
+            },
+            'buttons': {
+                'button_0': value,
+                'button_1': value,
+                ...
+            },
+            'hats': {
+                'hat_0': value,
+                'hat_1': value,
+                ...
+            }
+        }
+    Returns:
+        dict: A dictionary containing the current state of the controller inputs.
+    """
+    
+    inputs = {
+        "axes": {},
+        "buttons": {},
+        "hats": {}
+    }
+    
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+            
+        # Capture axis movement
+        for i in range(joystick.get_numaxes()):
+            axis_value = joystick.get_axis(i)
+            inputs['axes'][f'axis_{i}'] = axis_value
+            
+        # Capture button presses
+        for i in range(joystick.get_numbuttons()):
+            button_value = joystick.get_button(i)
+            inputs['buttons'][f'button_{i}'] = button_value
+            
+        # Capture hat (D-pad) movement
+        for i in range(joystick.get_numhats()):
+            hat_value = joystick.get_hat(i)
+            inputs['hats'][f'hat_{i}'] = hat_value
+
+    return inputs
+
+# Check if a controller is connected
+if pygame.joystick.get_count() == 0:
+    print("No controller connected!")
+    while pygame.joystick.get_count() == 0:
+        pass
+
+print(f"Connected to: {joystick.get_name()}")\
+
+while True:
+    controller_inputs = capture_controller_inputs()
+    if controller_inputs['buttons'].get('button_1', 0):
+        LED_PIN_ID.on()
+    else:
+        LED_PIN_ID.off()
