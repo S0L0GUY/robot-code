@@ -1,3 +1,4 @@
+import constants as constant
 from gpiozero import LED
 import pygame
 import json
@@ -9,8 +10,6 @@ controller_inputs = {
     "buttons": {},
     "hats": {}
 }
-
-LED_PIN_ID = LED(27)
 
 # Initialize pygame
 pygame.init()
@@ -94,11 +93,7 @@ if pygame.joystick.get_count() == 0:
     while pygame.joystick.get_count() == 0:
         pass
 
-print(f"Connected to: {joystick.get_name()}")\
+print(f"Connected to: {joystick.get_name()}")
 
 while True:
     controller_inputs = capture_controller_inputs()
-    if controller_inputs['buttons'].get('button_1', 0):
-        LED_PIN_ID.on()
-    else:
-        LED_PIN_ID.off()

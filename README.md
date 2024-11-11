@@ -28,7 +28,7 @@
  - - [ExpertPower 12v 7ah Rechargeable Sealed Lead Acid Battery](https://a.co/d/d4gsVd8)
  - - [Tenergy NiMH Battery Pack 12V 2000mAh](https://a.co/d/dOvbrWA)
 
-[Wiering Diagram](https://www.tldraw.com/s/v2_c_wILNgnf29_3v32llgyXTq?d=v-887.-64.1920.953.eGgpUsz7OhJ7m6jL8Jj8d)
+[Wiering Diagram](https://www.tldraw.com/s/v2_c_sRXHDCU-p6VVEBGza9NZv?d=v-887.-64.1920.953.eGgpUsz7OhJ7m6jL8Jj8d)
 
 ## `Best Pick`
  - ## `Drivetrain:`
