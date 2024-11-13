@@ -1,5 +1,5 @@
 import constants as constant
-from gpiozero import LED
+import commands.drive as drive
 import pygame
 import json
 import os
@@ -27,6 +27,14 @@ joystick.init()
 os.makedirs('json_files', exist_ok=True)
 
 def save_inputs_to_json(file_path='json_files/controller_inputs.json'):
+    """
+    Save controller inputs to a JSON file.
+    Args:
+        file_path (str): The path to the JSON file where the controller inputs will be saved. 
+                         Defaults to 'json_files/controller_inputs.json'.
+    Returns:
+        None
+    """
     with open(file_path, 'w') as f:
         json.dump(controller_inputs, f, indent=4)
 
@@ -97,3 +105,4 @@ print(f"Connected to: {joystick.get_name()}")
 
 while True:
     controller_inputs = capture_controller_inputs()
+    drive(controller_inputs['axes']['axis_1'], controller_inputs['axes']['axis_2'])
