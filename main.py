@@ -23,6 +23,8 @@ if pygame.joystick.get_count() == 0:
 joystick = pygame.joystick.Joystick(0)
 joystick.init()
 
+rsl = LED(constant.RSL_PIN) # type: ignore
+
 # Create directory if it doesn't exist
 os.makedirs('json_files', exist_ok=True)
 
@@ -103,6 +105,29 @@ if pygame.joystick.get_count() == 0:
 
 print(f"Connected to: {joystick.get_name()}")
 
-while True:
-    controller_inputs = capture_controller_inputs()
+def process_controller_inputs(controller_inputs):
+    """
+    Processes the inputs from the controller and runs commands accordingly.
+    Args:
+        controller_inputs (dict): A dictionary containing the controller inputs.
+            Expected keys:
+                - 'axes': A dictionary with axis values.
+                    Expected keys:
+                        - 'axis_1' (float): The value for the first axis.
+                        - 'axis_2' (float): The value for the second axis.
+    Returns:
+        None
+    """
+
     drive(controller_inputs['axes']['axis_1'], controller_inputs['axes']['axis_2'])
+
+while True:
+    # Get controller inputs
+    controller_inputs = capture_controller_inputs()
+
+    # Turn RSL on to indicate data processing is happening
+    rsl.on()
+    # Process controller inputs
+    process_controller_inputs(controller_inputs)
+    # Turn RSL off to indicate processing is done
+    rsl.off()

@@ -7,3 +7,5 @@ IN_2_PIN = 25
 
 IN_3_PIN = 24
 IN_4_PIN = 23
+
+RSL_PIN = 26

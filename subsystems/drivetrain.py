@@ -16,8 +16,8 @@ class Drivetrain:
         Initializes the Drivetrain with motor controllers for the left and right motors.
     """
     def __init__(self):
-        self.left_motor = PWMOutputDevice(constant.LEFT_MOTOR_PIN)
-        self.right_motor = PWMOutputDevice(constant.RIGHT_MOTOR_PIN)
+        self.left_motor = PWMOutputDevice(constant.LEFT_MOTOR_PIN) # type: ignore
+        self.right_motor = PWMOutputDevice(constant.RIGHT_MOTOR_PIN) # type: ignore
 
         self.in_1 = gpiozero.DigitalOutputDevice(constant.IN_1_PIN)
         self.in_2 = gpiozero.DigitalOutputDevice(constant.IN_2_PIN)
