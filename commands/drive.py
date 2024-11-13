@@ -9,10 +9,11 @@ def drive(forward_velocity, rotation_velocity):
         forward_velocity (float): The forward velocity component.
         rotation_velocity (float): The rotational velocity component.
     The function calculates the speed for the left and right motors by combining
-    the forward and rotational velocities. It then sets the drivetrain's motor
-    speeds accordingly.
+    the forward and rotational velocities. The speeds are rounded to two decimal
+    places before being set on the drivetrain.
     """
-    left_speed = forward_velocity + rotation_velocity
-    right_speed = forward_velocity - rotation_velocity
+    
+    left_speed = round(forward_velocity + rotation_velocity, 2)
+    right_speed = round(forward_velocity - rotation_velocity, 2)
     
     drivetrain.Drivetrain.set_drive_speed(left_speed, right_speed)
