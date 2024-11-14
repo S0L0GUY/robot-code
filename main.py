@@ -1,15 +1,8 @@
 import constants as constant
-import commands.drive as drive
+from commands.drive import Commands
 import pygame
 import json
 import os
-
-# Dictionary to store controller inputs
-controller_inputs = {
-    "axes": {},
-    "buttons": {},
-    "hats": {}
-}
 
 # Initialize pygame
 pygame.init()
@@ -23,7 +16,7 @@ if pygame.joystick.get_count() == 0:
 joystick = pygame.joystick.Joystick(0)
 joystick.init()
 
-rsl = LED(constant.RSL_PIN) # type: ignore
+# rsl = LED(constant.RSL_PIN)
 
 # Create directory if it doesn't exist
 os.makedirs('json_files', exist_ok=True)
@@ -75,25 +68,21 @@ def capture_controller_inputs():
         "buttons": {},
         "hats": {}
     }
-    
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
             
-        # Capture axis movement
-        for i in range(joystick.get_numaxes()):
-            axis_value = joystick.get_axis(i)
-            inputs['axes'][f'axis_{i}'] = axis_value
+    # Capture axis movement
+    for i in range(joystick.get_numaxes()):
+        axis_value = joystick.get_axis(i)
+        inputs['axes'][f'axis_{i}'] = axis_value
             
-        # Capture button presses
-        for i in range(joystick.get_numbuttons()):
-            button_value = joystick.get_button(i)
-            inputs['buttons'][f'button_{i}'] = button_value
+    # Capture button presses
+    for i in range(joystick.get_numbuttons()):
+        button_value = joystick.get_button(i)
+        inputs['buttons'][f'button_{i}'] = button_value
             
-        # Capture hat (D-pad) movement
-        for i in range(joystick.get_numhats()):
-            hat_value = joystick.get_hat(i)
-            inputs['hats'][f'hat_{i}'] = hat_value
+    # Capture hat (D-pad) movement
+    for i in range(joystick.get_numhats()):
+        hat_value = joystick.get_hat(i)
+        inputs['hats'][f'hat_{i}'] = hat_value
 
     return inputs
 
@@ -119,15 +108,15 @@ def process_controller_inputs(controller_inputs):
         None
     """
 
-    drive(controller_inputs['axes']['axis_1'], controller_inputs['axes']['axis_2'])
+    Commands.drive(controller_inputs['axes']['axis_1'], controller_inputs['axes']['axis_2'])
 
 while True:
     # Get controller inputs
     controller_inputs = capture_controller_inputs()
 
     # Turn RSL on to indicate data processing is happening
-    rsl.on()
+    # rsl.on()
     # Process controller inputs
     process_controller_inputs(controller_inputs)
     # Turn RSL off to indicate processing is done
-    rsl.off()
+    # rsl.off()
