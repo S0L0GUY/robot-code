@@ -1,5 +1,5 @@
 import constants as constant
-import gpiozero # type: ignore
+from gpiozero import PWMOutputDevice, DigitalOutputDevice # type: ignore
 
 class Drivetrain:
     """
@@ -16,13 +16,13 @@ class Drivetrain:
         Initializes the Drivetrain with motor controllers for the left and right motors.
     """
     def __init__(self):
-        self.left_motor = PWMOutputDevice(constant.LEFT_MOTOR_PIN) # type: ignore
-        self.right_motor = PWMOutputDevice(constant.RIGHT_MOTOR_PIN) # type: ignore
+        self.left_motor = PWMOutputDevice(constant.LEFT_MOTOR_PIN)
+        self.right_motor = PWMOutputDevice(constant.RIGHT_MOTOR_PIN)
 
-        self.in_1 = gpiozero.DigitalOutputDevice(constant.IN_1_PIN)
-        self.in_2 = gpiozero.DigitalOutputDevice(constant.IN_2_PIN)
-        self.in_3 = gpiozero.DigitalOutputDevice(constant.IN_3_PIN)
-        self.in_4 = gpiozero.DigitalOutputDevice(constant.IN_4_PIN)
+        self.in_1 = DigitalOutputDevice(constant.IN_1_PIN)
+        self.in_2 = DigitalOutputDevice(constant.IN_2_PIN)
+        self.in_3 = DigitalOutputDevice(constant.IN_3_PIN)
+        self.in_4 = DigitalOutputDevice(constant.IN_4_PIN)
 
     def set_drive_speed(self, left_speed, right_speed):
         """
