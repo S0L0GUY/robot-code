@@ -1,2 +1,17 @@
 
 .vscode/settings.json
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+json_files/
+*.log
+.env
+venv/
+env/
