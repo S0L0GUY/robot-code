@@ -1,5 +1,6 @@
 import constants as constant
-from gpiozero import PWMOutputDevice, DigitalOutputDevice # type: ignore
+from gpiozero import PWMOutputDevice, DigitalOutputDevice  # type: ignore
+
 
 class Drivetrain:
     """
@@ -13,7 +14,8 @@ class Drivetrain:
     Methods
     -------
     __init__()
-        Initializes the Drivetrain with motor controllers for the left and right motors.
+        Initializes the Drivetrain with motor controllers for the left and
+        right motors.
     """
     def __init__(self):
         self.left_motor = PWMOutputDevice(constant.LEFT_MOTOR_PIN)
@@ -28,35 +30,42 @@ class Drivetrain:
         """
         Sets the speed of the left and right motors of the drivetrain.
         Parameters:
-        left_speed (float): The speed to set for the left motor. Positive values move the motor forward, negative values move it backward, and zero stops the motor.
-        right_speed (float): The speed to set for the right motor. Positive values move the motor forward, negative values move it backward, and zero stops the motor.
-        The method also controls the state of the motor direction pins (in_1, in_2 for the left motor and in_3, in_4 for the right motor) based on the speed values.
+        left_speed (float): The speed to set for the left motor. Positive
+        values move the motor forward, negative values move it backward, and
+        zero stops the motor.
+        right_speed (float): The speed to set for the right motor. Positive
+        values move the motor forward, negative values move it backward, and
+        values move the motor forward, negative values move it backward, and
+        zero stops the motor.
+        The method also controls the state of the motor direction pins (in_1,
+        in_2 for the left motor and in_3, in_4 for the right motor) based on
+        the speed values.
         """
-    
+
         # Set the speed of the left motor
         if left_speed > 0:
-            self.left_motor.set(left_speed)
+            self.left_motor.value = left_speed
             self.in_1.on()
             self.in_2.off()
         elif left_speed < 0:
-            self.left_motor.set(-left_speed)
+            self.left_motor.value = -left_speed
             self.in_1.off()
             self.in_2.on()
         elif left_speed == 0:
-            self.left_motor.set(left_speed)
+            self.left_motor.value = left_speed
             self.in_1.off()
             self.in_2.off()
 
         # Set the speed of the right motor
         if right_speed > 0:
-            self.right_motor.set(right_speed)
+            self.right_motor.value = right_speed
             self.in_3.on()
             self.in_4.off()
         elif right_speed < 0:
-            self.right_motor.set(-right_speed)
+            self.right_motor.value = -right_speed
             self.in_3.off()
             self.in_4.on()
         elif right_speed == 0:
-            self.right_motor.set(right_speed)
+            self.right_motor.value = right_speed
             self.in_3.off()
             self.in_4.off()
